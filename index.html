@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Cloud Cost Estimator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+            width: 180px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AWS Cloud Cost Estimator</h1>
+
+    <div>
+        <label for="ec2">EC2 Instances:</label><br>
+        <input type="number" id="ec2" min="0" value="0">
+    </div>
+
+    <br>
+
+    <div>
+        <label for="s3">S3 Storage (GB):</label><br>
+        <input type="number" id="s3" min="0" value="0">
+    </div>
+
+    <br>
+
+    <div>
+        <label for="rds">RDS Instances:</label><br>
+        <input type="number" id="rds" min="0" value="0">
+    </div>
+
+    <br>
+
+    <button onclick="calculateCost()">Calculate Cost</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        function calculateCost() {
+            let ec2 = Number(document.getElementById("ec2").value) || 0;
+            let s3 = Number(document.getElementById("s3").value) || 0;
+            let rds = Number(document.getElementById("rds").value) || 0;
+
+            const EC2_COST = 50;
+            const S3_COST = 0.023;
+            const RDS_COST = 100;
+
+            let total =
+                (ec2 * EC2_COST) +
+                (s3 * S3_COST) +
+                (rds * RDS_COST);
+
+            document.getElementById("result").textContent =
+                "Estimated Monthly Cost: $" + total.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
